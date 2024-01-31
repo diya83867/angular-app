@@ -1,0 +1,3 @@
+<div *ngFor="let post of posts">
+    <a role="button" [routerLink]="['blog',post.slug]">{{post.title}}</a>
+</div>

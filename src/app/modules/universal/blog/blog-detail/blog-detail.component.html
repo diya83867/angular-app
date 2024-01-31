@@ -1,0 +1,134 @@
+<p>blog-detail works!</p>
+{{postdetail?.title}}
+<div [cdkCopyToClipboard]="postdetail?.content" role="button" [innerHTML]="postdetail?.content"></div>
+
+<div class="example-input-wrapper">
+    <label for="duration" class="text-primary">Animation duration:</label>
+    <input id="duration" value="2000" type="number" min="0" step="100" #duration>
+  </div>
+  
+  <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="duration.value">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your address</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+
+  <div class="example-container">
+    <h2>To do</h2>
+  
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (item of todo; track item) {
+        <div class="example-box" cdkDrag>{{item}}</div>
+      }
+    </div>
+  </div>
+  
+  <div class="example-container">
+    <h2>Done</h2>
+  
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (item of done; track item) {
+        <div class="example-box" cdkDrag>{{item}}</div>
+      }
+    </div>
+  </div>
+
+
+
+  <div ngbAccordion>
+	<div ngbAccordionItem [collapsed]="false">
+		<h2 ngbAccordionHeader>
+			<button ngbAccordionButton>Simple</button>
+		</h2>
+		<div ngbAccordionCollapse>
+			<div ngbAccordionBody>
+				<ng-template>
+					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+					officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+					moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
+					keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+					butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+					haven't heard of them accusamus labore sustainable VHS.
+				</ng-template>
+			</div>
+		</div>
+	</div>
+	<div ngbAccordionItem>
+		<h2 ngbAccordionHeader>
+			<button ngbAccordionButton>
+				<span>&#9733; <b>Fancy</b> title &#9733;</span>
+			</button>
+		</h2>
+		<div ngbAccordionCollapse>
+			<div ngbAccordionBody>
+				<ng-template>
+					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+					officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+					moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
+					keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+					butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+					haven't heard of them accusamus labore sustainable VHS.
+				</ng-template>
+			</div>
+		</div>
+	</div>
+	<div ngbAccordionItem [disabled]="true">
+		<h2 ngbAccordionHeader>
+			<button ngbAccordionButton>Disabled</button>
+		</h2>
+		<div ngbAccordionCollapse>
+			<div ngbAccordionBody>
+				<ng-template>
+					Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon
+					officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+					moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
+					keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+					butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+					haven't heard of them accusamus labore sustainable VHS.
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>
+<highcharts-chart *ngIf="isHighcharts" [Highcharts]="Highcharts" [options]="chartOptions">
+</highcharts-chart>
